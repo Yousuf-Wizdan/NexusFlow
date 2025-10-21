@@ -26,7 +26,7 @@ import {
   FormItem,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { authClient } from "@/lib/auth-client";;
+import { authClient } from "@/lib/auth-client";
 
 const registerSchema = z
   .object({
@@ -92,6 +92,12 @@ const SignUpForm = () => {
                     type="button"
                     disabled={isPending}
                   >
+                    <Image
+                      src={"/logos/google.svg"}
+                      width={20}
+                      height={20}
+                      alt="google"
+                    />
                     Continue with Google
                   </Button>
                 </div>

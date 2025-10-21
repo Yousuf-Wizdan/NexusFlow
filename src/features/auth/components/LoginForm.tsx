@@ -84,6 +84,12 @@ const LoginForm = () => {
                     type="button"
                     disabled={isPending}
                   >
+                    <Image
+                      src={'/logos/google.svg'}
+                      width={20}
+                      height={20}
+                      alt="google"
+                    />
                     Continue with Google
                   </Button>
                 </div>
