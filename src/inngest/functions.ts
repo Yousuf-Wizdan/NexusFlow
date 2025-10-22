@@ -1,6 +1,7 @@
 import { inngest } from "./client";
 import { generateText } from "ai";
-import { google } from '@ai-sdk/google';
+import { google } from "@ai-sdk/google";
+import * as Sentry from "@sentry/nextjs";
 
 // export const helloWorld = inngest.createFunction(
 //   { id: "hello-world" },
@@ -26,21 +27,24 @@ import { google } from '@ai-sdk/google';
 // );
 
 export const execute = inngest.createFunction(
-  {id: "execute-ai"},
-  {event: "execute/ai" },
-  async ({event , step}) => {
+  { id: "execute-ai" },
+  { event: "execute/ai" },
+  async ({ event, step }) => {
+    Sentry.logger.info("User triggered test log", {
+      log_source: "sentry_test",
+    });
 
-    const {steps} = await step.ai.wrap(
-      "gemini-generate-text",
-      generateText,
-      {
-        model: google("gemini-2.5-flash"),
-        system: "You are a helpfull Assitant",
-        prompt: "What is 2 + 2 ?"
-      }
-    )
+    const { steps } = await step.ai.wrap("gemini-generate-text", generateText, {
+      model: google("gemini-2.5-flash"),
+      system: "You are a helpfull Assitant",
+      prompt: "What is 2 + 2 ?",
+      experimental_telemetry: {
+        isEnabled: true,
+        recordInputs: true,
+        recordOutputs: true,
+      },
+    });
 
     return steps;
-
   }
-)
+);
