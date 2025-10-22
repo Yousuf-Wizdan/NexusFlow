@@ -21,6 +21,13 @@ const Page = () => {
     }
   }));
 
+  const testAi = useMutation(trpc.testAi.mutationOptions({
+    onSuccess: () => {
+      toast.success("AI Job Queued");
+    }
+  }));
+
+
   return (
     <div className="min-h-screen min-w-screen flex items-center justify-center">
       Protected Page - Only visible to authenticated users.
@@ -32,6 +39,15 @@ const Page = () => {
         Create Workflow
       </Button>
       <LogoutButton />
+      <Button
+        disabled={testAi.isPending}
+        onClick={() => {
+          testAi.mutate();
+        }}
+      >
+        Test AI
+      </Button>
+      {}
     </div>
   );
 };
