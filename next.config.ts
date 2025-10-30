@@ -8,9 +8,9 @@ const nextConfig: NextConfig = {
         source: "/",
         destination: "/workflows",
         permanent: false, //if any other projects it will also affect them thats why false
-      }
+      },
     ];
-  }
+  },
 };
 
 export default withSentryConfig(nextConfig, {
@@ -43,5 +43,5 @@ export default withSentryConfig(nextConfig, {
   // See the following for more information:
   // https://docs.sentry.io/product/crons/
   // https://vercel.com/docs/cron-jobs
-  automaticVercelMonitors: true
+  automaticVercelMonitors: true,
 });

@@ -119,7 +119,9 @@ const AppSidebar = () => {
             <SidebarMenuButton
               tooltip="Billing Portal"
               className="gap-x-4 h-10 px-4"
-              onClick={() => {authClient.customer.portal()}}
+              onClick={() => {
+                authClient.customer.portal();
+              }}
             >
               <CreditCardIcon className="h-4 w-4" />
               <span>Billing Portal</span>

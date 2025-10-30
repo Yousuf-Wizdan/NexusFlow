@@ -1,5 +1,6 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Image from "next/image";
 import Link from "next/link";
@@ -7,23 +8,21 @@ import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
-import { Button } from "@/components/ui/button";
 
 import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
 import {
   Form,
-  FormField,
   FormControl,
+  FormField,
+  FormItem,
   FormLabel,
   FormMessage,
-  FormItem,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { authClient } from "@/lib/auth-client";
@@ -48,20 +47,20 @@ const LoginForm = () => {
 
   const onSubmit = async (values: loginFormValues) => {
     await authClient.signIn.email(
-        {
-            email: values.email,
-            password: values.password,
-            callbackURL: '/'
+      {
+        email: values.email,
+        password: values.password,
+        callbackURL: "/",
+      },
+      {
+        onSuccess: () => {
+          router.push("/");
         },
-        {
-            onSuccess: () => {
-                router.push('/')
-            },
-            onError: (ctx) => {
-                toast.error(ctx.error.message)
-            }
-        }
-    )
+        onError: (ctx) => {
+          toast.error(ctx.error.message);
+        },
+      },
+    );
   };
 
   const isPending = form.formState.isSubmitting;
@@ -85,7 +84,7 @@ const LoginForm = () => {
                     disabled={isPending}
                   >
                     <Image
-                      src={'/logos/google.svg'}
+                      src={"/logos/google.svg"}
                       width={20}
                       height={20}
                       alt="google"
@@ -133,7 +132,7 @@ const LoginForm = () => {
                   </Button>
                 </div>
                 <div className="text-center text-sm">
-                  Don't have an account?{" "}
+                  Don&apso;t have an account?{" "}
                   <Link
                     href={"/signup"}
                     className="underline underline-offset-4"

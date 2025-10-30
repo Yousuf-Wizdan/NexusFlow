@@ -29,7 +29,7 @@ import * as Sentry from "@sentry/nextjs";
 export const execute = inngest.createFunction(
   { id: "execute-ai" },
   { event: "execute/ai" },
-  async ({ event, step }) => {
+  async ({ step }) => {
     Sentry.logger.info("User triggered test log", {
       log_source: "sentry_test",
     });
@@ -46,5 +46,5 @@ export const execute = inngest.createFunction(
     });
 
     return steps;
-  }
+  },
 );

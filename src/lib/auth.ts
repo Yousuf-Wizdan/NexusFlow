@@ -1,8 +1,8 @@
 import { betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
 import { PrismaClient } from "@/generated/prisma";
-import { polar, checkout, portal, usage, webhooks } from "@polar-sh/better-auth";
-import { Polar } from "@polar-sh/sdk";
+import { polar, checkout, portal } from "@polar-sh/better-auth";
+
 import { polarClient } from "./polar";
 
 const prisma = new PrismaClient();
@@ -16,21 +16,21 @@ export const auth = betterAuth({
   },
   plugins: [
     polar({
-        client: polarClient,
-        createCustomerOnSignUp: true,
-        use: [
-            checkout({
-                products: [
-                    {
-                        productId: "9998fc91-c8ca-4d8b-a3f5-b6b0059f60ec",
-                        slug: "NexusFlow-Pro"
-                    }
-                ],
-                successUrl: process.env.POLAR_SUCCESS_URL,
-                authenticatedUsersOnly: true
-            }),
-            portal()
-        ]
-    })
+      client: polarClient,
+      createCustomerOnSignUp: true,
+      use: [
+        checkout({
+          products: [
+            {
+              productId: "9998fc91-c8ca-4d8b-a3f5-b6b0059f60ec",
+              slug: "NexusFlow-Pro",
+            },
+          ],
+          successUrl: process.env.POLAR_SUCCESS_URL,
+          authenticatedUsersOnly: true,
+        }),
+        portal(),
+      ],
+    }),
   ],
 });
