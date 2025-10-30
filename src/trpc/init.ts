@@ -61,5 +61,5 @@ export const premiumProcedure = protectedProcedure.use(
         customer,
       },
     });
-  }
+  },
 );
