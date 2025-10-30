@@ -1,6 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { Spinner } from "@/components/ui/spinner";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Image from "next/image";
 import Link from "next/link";
@@ -128,7 +129,7 @@ const LoginForm = () => {
                     )}
                   />
                   <Button type="submit" className="w-full" disabled={isPending}>
-                    {isPending ? "Logging in..." : "Login"}
+                    {isPending ? <Spinner /> : "Login"}
                   </Button>
                 </div>
                 <div className="text-center text-sm">
