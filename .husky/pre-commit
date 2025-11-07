@@ -1,5 +1,4 @@
-#!/bin/sh
-. "$(dirname "$0")/_/husky.sh"
+
 
 # ANSI color codes for terminal
 RED='\033[0;31m'
