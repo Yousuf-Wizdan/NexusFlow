@@ -68,6 +68,11 @@ export const Editor = ({ workflowId }: { workflowId: string }) => {
         fitView
         nodeTypes={nodeComponents}
         onInit={setEditor}
+        snapGrid={[10, 10]}
+        snapToGrid={true}
+        panOnScroll
+        panOnDrag={false}
+        selectionOnDrag
         proOptions={{
           hideAttribution: true,
         }}
