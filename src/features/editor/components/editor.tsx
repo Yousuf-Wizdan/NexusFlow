@@ -19,11 +19,13 @@ import {
   ReactFlow,
 } from "@xyflow/react";
 
+import { NodeType } from "@/generated/prisma";
 import "@xyflow/react/dist/style.css";
 import { useSetAtom } from "jotai";
-import { useCallback, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { editorAtom } from "../store/atoms";
 import { AddNodeButton } from "./AddNodeButton";
+import { ExcuteWorkflowButton } from "./ExecuteWorkflowButton";
 
 export const EditorLoading = () => {
   return <LoadingView message="Loading Editor" />;
@@ -57,6 +59,10 @@ export const Editor = ({ workflowId }: { workflowId: string }) => {
     [],
   );
 
+  const hasManualTrigger = useMemo(() => {
+    return nodes.some((node) => node.type === NodeType.MANUAL_TRIGGER);
+  }, [nodes]);
+
   return (
     <div className="size-full">
       <ReactFlow
@@ -83,6 +89,11 @@ export const Editor = ({ workflowId }: { workflowId: string }) => {
         <Panel position="top-right">
           <AddNodeButton />
         </Panel>
+        {hasManualTrigger && (
+          <Panel position="bottom-center">
+            <ExcuteWorkflowButton workflowId={workflowId} />
+          </Panel>
+        )}
       </ReactFlow>
     </div>
   );
