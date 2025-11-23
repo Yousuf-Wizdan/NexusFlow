@@ -3,10 +3,14 @@ import { NodeType } from "@/generated/prisma";
 import { httpRequestExecutor } from "../components/http-request/executor";
 import { NodeExecutor } from "../types";
 
-export const executorRegistry: Partial<Record<NodeType, NodeExecutor>> = {
+export const executorRegistry: Partial<
+  Record<NodeType, NodeExecutor<Record<string, unknown>>>
+> = {
   [NodeType.MANUAL_TRIGGER]: manualTriggerExecutor,
   [NodeType.INITIAL]: manualTriggerExecutor,
-  [NodeType.HTTP_REQUEST]: httpRequestExecutor,
+  [NodeType.HTTP_REQUEST]: httpRequestExecutor as NodeExecutor<
+    Record<string, unknown>
+  >,
 };
 
 export const getExecutor = (type: NodeType): NodeExecutor => {

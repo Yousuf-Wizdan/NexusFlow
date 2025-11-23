@@ -12,6 +12,6 @@ export interface NodeExecutorParams<TData = Record<string, unknown>> {
   // TODO: Add realtime later
 }
 
-export type NodeExecutor<TData = Record<string, unknown>> = (
-  params: NodeExecutorParams<TData>,
-) => Promise<WorkflowContext>;
+export type NodeExecutor<
+  TData extends Record<string, unknown> = Record<string, unknown>,
+> = (params: NodeExecutorParams<TData>) => Promise<WorkflowContext>;
