@@ -40,7 +40,7 @@ const formSchema = z.object({
       message:
         "Variable name must start with a letter or underscore and container only letters, numbers, and underscores.",
     }),
-  endpoint: z.url({ message: "Please enter a valid URL" }),
+  endpoint: z.string().min(1, { message: "Please enter a valid URL" }),
   method: z.enum(["GET", "POST", "PUT", "PATCH", "DELETE"]),
   body: z.string().optional(),
   //refine TODO: add more validation
@@ -149,6 +149,7 @@ export const HttpTriggerDialog = ({
                   <FormDescription>
                     The HTTP method to use for the request.
                   </FormDescription>
+                  <FormMessage />
                 </FormItem>
               )}
             />
@@ -168,6 +169,7 @@ export const HttpTriggerDialog = ({
                     Static URL or use {"{{variables}}"} for simple values or{" "}
                     {"{{json variable}}"} to stringify objects
                   </FormDescription>
+                  <FormMessage />
                 </FormItem>
               )}
             />
@@ -192,6 +194,7 @@ export const HttpTriggerDialog = ({
                       simple values or {"{{json variable}}"} to stringify
                       objects.
                     </FormDescription>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
