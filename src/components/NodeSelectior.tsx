@@ -47,6 +47,12 @@ const executionNodes: NodeTypeOptions[] = [
     description: "Makes an HTTP request",
     icon: GlobeIcon,
   },
+  {
+    type: NodeType.GEMINI,
+    label: "Gemini",
+    description: "Use google gemini to generate text",
+    icon: "/logos/gemini.svg",
+  },
 ];
 
 interface NodeSelectorProps {
@@ -173,6 +179,8 @@ export function NodeSelector({
                       src={Icon}
                       alt={nodeType.label}
                       className="size-5 object-contain rounded-sm"
+                      height={16}
+                      width={16}
                     />
                   ) : (
                     <Icon className="size-5" />

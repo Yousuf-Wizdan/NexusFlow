@@ -1,11 +1,9 @@
+import { checkout, polar, portal } from "@polar-sh/better-auth";
 import { betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
-import { PrismaClient } from "@/generated/prisma";
-import { polar, checkout, portal } from "@polar-sh/better-auth";
 
+import prisma from "./db";
 import { polarClient } from "./polar";
-
-const prisma = new PrismaClient();
 export const auth = betterAuth({
   database: prismaAdapter(prisma, {
     provider: "postgresql",
