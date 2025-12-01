@@ -1,6 +1,7 @@
 import { googleFormTriggerExecutor } from "@/features/triggers/components/google-form-trigger/executor";
 import { manualTriggerExecutor } from "@/features/triggers/components/manual-triggers/executor";
 import { NodeType } from "@/generated/prisma";
+import { GeminiExecutor } from "../components/gemini/executor";
 import { httpRequestExecutor } from "../components/http-request/executor";
 import { NodeExecutor } from "../types";
 
@@ -15,6 +16,7 @@ export const executorRegistry: Partial<
   [NodeType.GOOGLE_FORM_TRIGGER]: googleFormTriggerExecutor as NodeExecutor<
     Record<string, unknown>
   >,
+  [NodeType.GEMINI]: GeminiExecutor as NodeExecutor<Record<string, unknown>>,
 };
 
 export const getExecutor = (type: NodeType): NodeExecutor => {

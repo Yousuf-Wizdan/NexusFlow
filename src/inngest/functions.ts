@@ -2,6 +2,7 @@ import { getExecutor } from "@/features/executions/lib/ExecutorRegistry";
 import { NodeType } from "@/generated/prisma";
 import prisma from "@/lib/db";
 import { NonRetriableError } from "inngest";
+import { GeminiChannel } from "./channels/gemini";
 import { GoogleFormTriggerChannel } from "./channels/GoogleFromTrigger";
 import { HttpReqestChannel } from "./channels/HttpRequest";
 import { ManualTriggerChannel } from "./channels/MannualTriggers";
@@ -19,6 +20,7 @@ export const executeWorkflow = inngest.createFunction(
       HttpReqestChannel(),
       ManualTriggerChannel(),
       GoogleFormTriggerChannel(),
+      GeminiChannel(),
     ],
   },
   async ({ event, step, publish }) => {
